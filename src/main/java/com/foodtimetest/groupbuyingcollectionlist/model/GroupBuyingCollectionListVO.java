@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class GroupBuyingCollectionListVO implements Serializable{
-	
+	 
 	private Integer gbId;
 	private Integer memId;
 	private Date createAt;

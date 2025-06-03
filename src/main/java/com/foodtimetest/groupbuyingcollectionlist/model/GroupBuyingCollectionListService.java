@@ -13,12 +13,12 @@ public class GroupBuyingCollectionListService {
 
 	// 新增收藏
 	public GroupBuyingCollectionListVO addCollection(Integer gbId, Integer memId) {
-	    GroupBuyingCollectionListVO groupbuyingcollectionlistVO = new GroupBuyingCollectionListVO();
-	    groupbuyingcollectionlistVO.setGbId(gbId);
-	    groupbuyingcollectionlistVO.setMemId(memId);
-	    groupbuyingcollectionlistVO.setCreateAt(new Date());
-	    dao.insert(groupbuyingcollectionlistVO);
-	    return groupbuyingcollectionlistVO;
+	    GroupBuyingCollectionListVO collectionVO = new GroupBuyingCollectionListVO();
+	    collectionVO.setGbId(gbId);
+	    collectionVO.setMemId(memId);
+	    collectionVO.setCreateAt(new Date());
+	    dao.insert(collectionVO);
+	    return collectionVO;
 	}
 
 	// 刪除收藏

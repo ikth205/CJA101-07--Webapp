@@ -9,7 +9,7 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
     private static final String DRIVER   = "com.mysql.cj.jdbc.Driver";
     private static final String URL      = "jdbc:mysql://localhost:3306/g05?serverTimezone=Asia/Taipei";
     private static final String USER     = "root";
-    private static final String PASSWORD = "karen51020";
+    private static final String PASSWORD = "123456";
 
     // SQL 語句
     private static final String INSERT_STMT   = "INSERT INTO GROUP_BUYING_COLLECTION_LIST (GB_ID, MEM_ID, CREATE_AT) VALUES (?, ?, ?)";
@@ -26,13 +26,13 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
         }
     }
 
-    public void insert(GroupBuyingCollectionListVO vo) {
+    public void insert(GroupBuyingCollectionListVO collectionVO) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(INSERT_STMT)) {
 
-            pstmt.setInt(1, vo.getGbId());
-            pstmt.setInt(2, vo.getMemId());
-            pstmt.setTimestamp(3, new Timestamp(vo.getCreateAt().getTime()));
+            pstmt.setInt(1, collectionVO.getGbId());
+            pstmt.setInt(2, collectionVO.getMemId());
+            pstmt.setTimestamp(3, new Timestamp(collectionVO.getCreateAt().getTime()));
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
     }
 
     public GroupBuyingCollectionListVO findByPrimaryKey(Integer gbId, Integer memId) {
-        GroupBuyingCollectionListVO vo = null;
+        GroupBuyingCollectionListVO collectionVO = null;
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(GET_ONE_STMT)) {
 
@@ -62,17 +62,17 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
             pstmt.setInt(2, memId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    vo = new GroupBuyingCollectionListVO();
-                    vo.setGbId     (rs.getInt("GB_ID"));
-                    vo.setMemId    (rs.getInt("MEM_ID"));
-                    vo.setCreateAt(rs.getTimestamp("CREATE_AT"));
+                	collectionVO = new GroupBuyingCollectionListVO();
+                	collectionVO.setGbId     (rs.getInt("GB_ID"));
+                	collectionVO.setMemId    (rs.getInt("MEM_ID"));
+                	collectionVO.setCreateAt(rs.getTimestamp("CREATE_AT"));
                 }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException("A database error occurred during findByPrimaryKey: " + e.getMessage(), e);
         }
-        return vo;
+        return collectionVO;
     }
 
     public List<GroupBuyingCollectionListVO> getAll() {
@@ -82,11 +82,11 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                GroupBuyingCollectionListVO vo = new GroupBuyingCollectionListVO();
-                vo.setGbId     (rs.getInt("GB_ID"));
-                vo.setMemId    (rs.getInt("MEM_ID"));
-                vo.setCreateAt(rs.getTimestamp("CREATE_AT"));
-                list.add(vo);
+                GroupBuyingCollectionListVO collectionVO = new GroupBuyingCollectionListVO();
+                collectionVO.setGbId     (rs.getInt("GB_ID"));
+                collectionVO.setMemId    (rs.getInt("MEM_ID"));
+                collectionVO.setCreateAt(rs.getTimestamp("CREATE_AT"));
+                list.add(collectionVO);
             }
 
         } catch (SQLException e) {
@@ -103,11 +103,11 @@ public class GroupBuyingCollectionListJDBCDAO implements GroupBuyingCollectionLi
             pstmt.setInt(1, memId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    GroupBuyingCollectionListVO vo = new GroupBuyingCollectionListVO();
-                    vo.setGbId     (rs.getInt("GB_ID"));
-                    vo.setMemId    (rs.getInt("MEM_ID"));
-                    vo.setCreateAt(rs.getTimestamp("CREATE_AT"));
-                    list.add(vo);
+                    GroupBuyingCollectionListVO collectionVO = new GroupBuyingCollectionListVO();
+                    collectionVO.setGbId     (rs.getInt("GB_ID"));
+                    collectionVO.setMemId    (rs.getInt("MEM_ID"));
+                    collectionVO.setCreateAt(rs.getTimestamp("CREATE_AT"));
+                    list.add(collectionVO);
                 }
             }
 

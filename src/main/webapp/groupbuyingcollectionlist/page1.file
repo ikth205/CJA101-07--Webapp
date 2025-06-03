@@ -5,7 +5,7 @@
     int whichPage=1;      //第幾頁
     int pageIndexArray[]=null;
     int pageIndex=0; 
-%>
+%>  
 
 <%  
     rowNumber=list.size();
